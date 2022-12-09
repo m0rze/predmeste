@@ -21080,3 +21080,13 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+.top-navbar {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .top-navbar {
+    display: block;
+  }
+}
