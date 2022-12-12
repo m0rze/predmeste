@@ -23,3 +23,12 @@
         font-size: 14px;
     }
 }
+
+.delete-icon {
+    text-align: center;
+    color: red;
+    font-size: 26px;
+    .delete-item {
+        cursor: pointer;
+    }
+}

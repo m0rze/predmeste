@@ -10,6 +10,7 @@ class CategoriesQB
     public function getCategoriesForTable()
     {
         return Category::withCount("pages")
+            ->orderBy("created_at", "DESC")
             ->paginate(20);
     }
 
@@ -26,5 +27,27 @@ class CategoriesQB
     }
 
 
+    public function updateTitleById($id, $title)
+    {
+        $cat = Category::find($id);
+        if(empty($cat))
+        {
+            return false;
+        }
+        $cat->title = $title;
+        $cat->save();
+        return true;
+    }
+
+    public function deleteCategoryById($id)
+    {
+        $cat = Category::find($id);
+        if(empty($cat))
+        {
+            return false;
+        }
+        $cat->delete();
+        return true;
+    }
 
 }

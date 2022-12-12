@@ -25,12 +25,30 @@ var Categories = /*#__PURE__*/function () {
     this.catNameInput = document.querySelector(".cat_name");
     this.tdTitleEl = document.querySelectorAll(".td-title");
     this.errorEl = document.querySelector(".error-text");
+    this.deleteItems = document.querySelectorAll(".delete-item");
     this.setEvents();
   }
   _createClass(Categories, [{
     key: "setEvents",
     value: function setEvents() {
       var _this = this;
+      this.deleteItems.forEach(function (el) {
+        el.addEventListener("click", function (event) {
+          var tdEl = event.target.closest("td");
+          var catId = tdEl.dataset.id;
+          if (catId) {
+            _this.deleteCat(catId).then(function (response) {
+              if (response.data.result === 1) {
+                tdEl.closest("tr").remove();
+              } else {
+                location.reload();
+              }
+            })["catch"](function (error) {
+              location.reload();
+            });
+          }
+        });
+      });
       this.tdTitleEl.forEach(function (el) {
         el.addEventListener("click", function () {
           document.querySelector(".cat_name").value = el.innerHTML;
@@ -67,7 +85,7 @@ var Categories = /*#__PURE__*/function () {
           _this.errorEl.innerHTML = "Заполните имя категории";
           _this.addCatButton.disabled = false;
         } else {
-          _this.doPostRequest(catName).then(function (response) {
+          _this.addCat(catName).then(function (response) {
             if (response.data.result === 1) {
               location.reload();
             }
@@ -91,19 +109,20 @@ var Categories = /*#__PURE__*/function () {
       });
     }
   }, {
-    key: "doPostRequest",
+    key: "deleteCat",
     value: function () {
-      var _doPostRequest = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(catName) {
+      var _deleteCat = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(catId) {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.axios.post(this.API + "/add", {
+                return this.axios["delete"](this.API + "/delete/" + catId, {
+                  headers: {
+                    token: this.token
+                  },
                   data: JSON.stringify({
-                    token: this.token,
-                    title: catName,
-                    cat_id: document.querySelector(".cat_id").value
+                    cat_id: catId
                   })
                 });
               case 2:
@@ -115,10 +134,43 @@ var Categories = /*#__PURE__*/function () {
           }
         }, _callee, this);
       }));
-      function doPostRequest(_x) {
-        return _doPostRequest.apply(this, arguments);
+      function deleteCat(_x) {
+        return _deleteCat.apply(this, arguments);
       }
-      return doPostRequest;
+      return deleteCat;
+    }()
+  }, {
+    key: "addCat",
+    value: function () {
+      var _addCat = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(catName) {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return this.axios.post(this.API + "/add", {
+                  data: JSON.stringify({
+                    title: catName,
+                    cat_id: document.querySelector(".cat_id").value
+                  })
+                }, {
+                  headers: {
+                    token: this.token
+                  }
+                });
+              case 2:
+                return _context2.abrupt("return", _context2.sent);
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+      function addCat(_x2) {
+        return _addCat.apply(this, arguments);
+      }
+      return addCat;
     }()
   }]);
   return Categories;

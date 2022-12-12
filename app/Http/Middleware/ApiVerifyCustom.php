@@ -19,10 +19,16 @@ class ApiVerifyCustom
      */
     public function handle(Request $request, Closure $next)
     {
-
-        $data = $request->input("data");
-        $data = json_decode($data);
-        if(!empty($data->token) && $data->token === Config::$token)
+//        $data = $request->input("data");
+//        $data = json_decode($data);
+//        if(!empty($data->token))
+//        {
+//            $token = $data->token;
+//        } elseif(!empty($request->header("token"))) {
+//            $token =
+//        }
+        $token = $request->header("token");
+        if(!empty($token) && $token === Config::$token)
         {
             return $next($request);
         }

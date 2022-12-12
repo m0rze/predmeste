@@ -25,5 +25,6 @@ use App\Http\Middleware\ApiVerifyCustom;
 Route::middleware([ApiVerifyCustom::class])->group(function () {
     Route::group(["prefix" => "admin", "as" => "admin."], function () {
         Route::post("/category/add", [ApiCategoryController::class, "addNew"]);
+        Route::delete("/category/delete/{id}", [ApiCategoryController::class, "delete"]);
     });
 });

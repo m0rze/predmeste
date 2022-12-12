@@ -10,11 +10,30 @@ class Categories {
         this.catNameInput = document.querySelector(".cat_name");
         this.tdTitleEl = document.querySelectorAll(".td-title");
         this.errorEl = document.querySelector(".error-text");
-
+        this.deleteItems = document.querySelectorAll(".delete-item");
         this.setEvents();
     }
 
     setEvents() {
+
+        this.deleteItems.forEach(el => {
+            el.addEventListener("click", (event) => {
+                const tdEl = event.target.closest("td");
+                const catId = tdEl.dataset.id;
+                if (catId) {
+                    this.deleteCat(catId).then(response => {
+                        if (response.data.result === 1) {
+                            tdEl.closest("tr").remove();
+                        } else {
+                            location.reload();
+                        }
+
+                    }).catch((error) => {
+                        location.reload();
+                    });
+                }
+            });
+        });
 
         this.tdTitleEl.forEach(el => {
             el.addEventListener("click", () => {
@@ -56,20 +75,17 @@ class Categories {
                 this.errorEl.innerHTML = "Заполните имя категории";
                 this.addCatButton.disabled = false;
             } else {
-                this.doPostRequest(catName).then(response => {
-                    if(response.data.result === 1)
-                    {
+                this.addCat(catName).then(response => {
+                    if (response.data.result === 1) {
                         location.reload();
                     }
-                    if(response.data.error === "catexists")
-                    {
+                    if (response.data.error === "catexists") {
                         this.wasError = true;
                         this.errorEl.classList.toggle("deactivated");
                         this.errorEl.innerHTML = "Такая категория уже существует";
                         this.addCatButton.disabled = false;
                     }
-                    if(response.data.error === "badinsert")
-                    {
+                    if (response.data.error === "badinsert") {
                         this.wasError = true;
                         this.errorEl.classList.toggle("deactivated");
                         this.errorEl.innerHTML = "Что-то пошло не так :-( Перезагрузите страницу...";
@@ -83,15 +99,30 @@ class Categories {
         });
     }
 
-    async doPostRequest(catName) {
-
-        return await this.axios.post(this.API + "/add", {
+    async deleteCat(catId) {
+        return await this.axios.delete(this.API + "/delete/" + catId, {
+            headers: {
+                token: this.token
+            },
             data: JSON.stringify({
-                token: this.token,
-                title: catName,
-                cat_id: document.querySelector(".cat_id").value
+                cat_id: catId
             })
         });
+    }
+
+    async addCat(catName) {
+
+        return await this.axios.post(this.API + "/add", {
+                data: JSON.stringify({
+                    title: catName,
+                    cat_id: document.querySelector(".cat_id").value
+                })
+            },
+            {
+                headers: {
+                    token: this.token
+                }
+            });
     }
 
 }

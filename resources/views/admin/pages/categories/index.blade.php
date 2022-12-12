@@ -6,55 +6,47 @@
     <div class="card shadow mb-4">
 
         <div class="card-header py-3">
-            @if(empty($categories))
+            @if(empty($categories) || count($categories) === 0)
                 <h6 class="m-0 font-weight-bold text-primary">Категории отсутствуют</h6>
             @endif
-            <button type="button" class="new-cat-button btn btn-success btn-rnd @if(empty($categories)) mt-3 @endif">
+            <button type="button" class="new-cat-button btn btn-success btn-rnd @if(empty($categories) || count($categories) === 0) mt-3 @endif">
                 Создать новую
             </button>
         </div>
         <div class="card-body">
-            @if(!empty($categories))
+            @if(!empty($categories) && count($categories) > 0)
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Имя</th>
-                            <th>Slug</th>
-                            <th>Количество страниц</th>
-                            <th>Дата</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>#</th>
                             <th>Заголовок</th>
                             <th>Slug</th>
                             <th>Количество страниц</th>
                             <th>Дата</th>
+                            <th>Действие</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Заголовок</th>
+                            <th>Slug</th>
+                            <th>Количество страниц</th>
+                            <th>Дата</th>
+                            <th>Действие</th>
                         </tr>
                         </tfoot>
                         <tbody>
                         @foreach($categories as $category)
                             <tr class="table-item">
-                                <td><input type="checkbox" name="cat_id[]" value="{{ $category->id }}"></td>
                                 <td data-id="{{ $category->id }}" class="td-title">{{ $category->title }}</td>
                                 <td>{{ $category->slug }}</td>
                                 <td>{{ $category->pages_count }}</td>
                                 <td>{{ $category->created_at }}</td>
+                                <td class="delete-icon" data-id="{{ $category->id }}"><button type="button" class="delete-item btn btn-rnd btn-outline-danger"><i class="fa fa-solid fa-circle-xmark"></i></button></td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
-                    <div class="row mt-2">
-                        <div class="col-2"></div>
-                        <div class="col-2"></div>
-                        <div class="col-2"></div>
-                        <div class="col-2"></div>
-                        <div class="col-2"></div>
-                        <div class="col-2"><button class="delete-button btn btn-danger btn-rnd">Удалить</button></div>
-                    </div>
                 </div>
                 {{ $categories->onEachSide(5)->links() }}
             @endif

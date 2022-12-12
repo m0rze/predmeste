@@ -10850,6 +10850,15 @@ textarea.form-control-lg {
   font-size: 14px;
 }
 
+.delete-icon {
+  text-align: center;
+  color: red;
+  font-size: 26px;
+}
+.delete-icon .delete-item {
+  cursor: pointer;
+}
+
 :root {
   --blue: #4e73df;
   --indigo: #6610f2;
