@@ -1,0 +1,25 @@
+.deactivated {
+    display: none;
+}
+.new-cat-modal {
+    background-color: #eeeeee;
+    position: fixed;
+    width: 70%;
+    left: 15%;
+    top: 100px;
+    border: 1px solid #d0cece;
+    border-radius: 15px;
+
+    .new-cat-items {
+        width: 100%;
+        height: 100%;
+        padding: 2%;
+    }
+
+    .error-text {
+        text-align: center;
+        color: darkred;
+        font-weight: bolder;
+        font-size: 14px;
+    }
+}

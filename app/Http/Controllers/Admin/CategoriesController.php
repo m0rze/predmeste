@@ -3,10 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\QueryBuilders\CategoriesQB;
 use Illuminate\Http\Request;
+use Root\Config;
 
 class CategoriesController extends Controller
 {
+
+    private CategoriesQB $categoriesQB;
+
+    public function __construct(
+        CategoriesQB $categoriesQB
+    )
+    {
+        $this->categoriesQB = $categoriesQB;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +27,8 @@ class CategoriesController extends Controller
     public function index()
     {
         return view("admin.pages.categories.index", [
-
+            "token" => Config::$token,
+            "categories" => $this->categoriesQB->getCategoriesForTable()
         ]);
     }
 

@@ -12,10 +12,10 @@ class Category extends Model
 {
     use HasFactory, HasSlug;
 
-    protected $table = "pages";
+    protected $table = "categories";
     protected $guarded = [];
 
-    public function page(): HasMany
+    public function pages(): HasMany
     {
         return $this->hasMany(Page::class, "category_id", "id");
     }
@@ -25,7 +25,6 @@ class Category extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug')
-            ->doNotGenerateSlugsOnUpdate()
             ->usingLanguage('ru');
     }
 }

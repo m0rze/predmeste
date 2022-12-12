@@ -1,5 +1,6 @@
 @import "bootstrap";
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import "categories";
 :root {
     --blue: #4e73df;
     --indigo: #6610f2;
@@ -11516,4 +11517,8 @@ body.sidebar-toggled footer.sticky-footer {
     .top-navbar {
         display: block;
     }
+}
+
+.low-opacity {
+    opacity: 0.2;
 }
