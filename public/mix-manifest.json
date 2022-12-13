@@ -1,6 +1,8 @@
 {
     "/js/admin/main.js": "/js/admin/main.js",
     "/js/admin/categories.js": "/js/admin/categories.js",
+    "/js/admin/pages.js": "/js/admin/pages.js",
+    "/js/admin/editor.js": "/js/admin/editor.js",
     "/js/website/main.js": "/js/website/main.js",
     "/css/admin/app.css": "/css/admin/app.css",
     "/css/website/app.css": "/css/website/app.css"

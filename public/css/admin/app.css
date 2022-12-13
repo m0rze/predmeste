@@ -10850,13 +10850,15 @@ textarea.form-control-lg {
   font-size: 14px;
 }
 
-.delete-icon {
-  text-align: center;
-  color: red;
-  font-size: 26px;
+.editor-buttons {
+  margin: 15px 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
-.delete-icon .delete-item {
-  cursor: pointer;
+.editor-buttons .margin-right {
+  margin-right: 15px;
 }
 
 :root {
@@ -21126,4 +21128,19 @@ body.sidebar-toggled footer.sticky-footer {
 }
 .low-opacity {
   opacity: 0.2;
+}
+
+.delete-icon {
+  text-align: center;
+  color: red;
+  font-size: 26px;
+}
+.delete-icon .delete-item {
+  cursor: pointer;
+}
+
+.page-form {
+  background-color: white;
+  padding: 2%;
+  border-radius: 10px;
 }

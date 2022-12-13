@@ -76,7 +76,6 @@
             </div>
         </div>
     </div>
-    <input type="hidden" class="token" value="{{ $token }}">
 @endsection
 @section("scripts")
     <script src="{{ asset("js/admin/categories.js") }}"></script>

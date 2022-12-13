@@ -16,11 +16,11 @@
             <span>Категории</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route("admin.static-pages.index") }}">
+        <a class="nav-link" href="{{ route("admin.pages.index") }}">
             <span>Страницы категорий</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route("admin.pages.index") }}">
+        <a class="nav-link" href="{{ route("admin.static-pages.index") }}">
             <span>Статичные страницы</span></a>
     </li>
     <hr class="sidebar-divider my-0">

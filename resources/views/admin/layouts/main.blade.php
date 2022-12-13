@@ -17,6 +17,7 @@
             <x-admin.topbar></x-admin.topbar>
             <div class="container-fluid">
                 @yield("content")
+                <input type="hidden" class="token" value="{{ $token }}">
                 <x-admin.footer></x-admin.footer>
             </div>
         </div>

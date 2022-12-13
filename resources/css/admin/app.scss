@@ -1,6 +1,8 @@
 @import "bootstrap";
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
 @import "categories";
+@import "pages";
+@import "editor";
 :root {
     --blue: #4e73df;
     --indigo: #6610f2;
@@ -11521,4 +11523,19 @@ body.sidebar-toggled footer.sticky-footer {
 
 .low-opacity {
     opacity: 0.2;
+}
+
+.delete-icon {
+    text-align: center;
+    color: red;
+    font-size: 26px;
+    .delete-item {
+        cursor: pointer;
+    }
+}
+
+.page-form {
+    background-color: white;
+    padding: 2%;
+    border-radius: 10px;
 }

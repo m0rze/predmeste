@@ -7,6 +7,11 @@ use App\Models\Category;
 class CategoriesQB
 {
 
+    public function getCategoriesForNewPage()
+    {
+        return Category::select("id", "title")->get();
+    }
+
     public function getCategoriesForTable()
     {
         return Category::withCount("pages")
