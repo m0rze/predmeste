@@ -2,36 +2,37 @@ class EditorFuncs {
     constructor(textAreaClass) {
         this.textAreaClass = textAreaClass;
         this.textArea = document.querySelector(this.textAreaClass);
-        console.log(this.textArea);
+    }
+
+    p() {
+        this.tagSelected("p");
     }
 
     h1() {
-        const start = this.textArea.selectionStart;
-        console.log(start);
-        const finish = this.textArea.selectionEnd;
-        console.log(finish);
-        const allText = this.textArea.value;
-        const sel = allText.substring(start, finish);
-        console.log(sel);
-        const newText = allText.substring(0, start) + "<center>" + sel + "</center>" + allText.substring(finish, allText.length);
-        console.log(newText);
-        this.textArea.value = newText;
+        this.tagSelected("h1");
     }
 
     h2() {
+        this.tagSelected("h2");
 
     }
 
     h3() {
+        this.tagSelected("h3");
 
     }
 
+    h4() {
+        this.tagSelected("h4");
+    }
+
     strong() {
+        this.tagSelected("strong");
 
     }
 
     strike() {
-
+        this.tagSelected("s");
     }
 
     link() {
@@ -43,6 +44,34 @@ class EditorFuncs {
     }
 
     image() {
+
+    }
+
+    tagSelected(tag) {
+        const start = this.textArea.selectionStart;
+        const finish = this.textArea.selectionEnd;
+        const allText = this.textArea.value;
+        const sel = allText.substring(start, finish);
+
+        const startTag = "<" + tag + ">";
+        const startTagLen = startTag.length;
+        const endTag = "</" + tag + ">";
+        const endTagLen = endTag.length;
+        if(allText.indexOf("<" + tag + ">" + sel + "</" + tag + ">") !== -1)
+        {
+            const startWithTag = start - startTagLen;
+            const endWithTag = finish + endTagLen;
+            let newSel = allText.substring(startWithTag, endWithTag);
+            newSel = newSel.replace(/<\/?[^>]+(>|$)/g, "");
+            this.textArea.value = allText.substring(0, startWithTag) + newSel + allText.substring(endWithTag, allText.length);
+            this.textArea.selectionStart = startWithTag;
+            this.textArea.selectionEnd = endWithTag - startTagLen - endTagLen;
+        } else {
+            this.textArea.value = allText.substring(0, start) + "<" + tag + ">" + sel + "</" + tag + ">" + allText.substring(finish, allText.length);
+            this.textArea.selectionStart = start + startTagLen;
+            this.textArea.selectionEnd = finish + startTagLen;
+        }
+
 
     }
 }

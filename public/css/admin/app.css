@@ -10855,7 +10855,7 @@ textarea.form-control-lg {
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  flex-wrap: wrap;
 }
 .editor-buttons .margin-right {
   margin-right: 15px;

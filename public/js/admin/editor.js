@@ -14,34 +14,42 @@ var EditorFuncs = /*#__PURE__*/function () {
     _classCallCheck(this, EditorFuncs);
     this.textAreaClass = textAreaClass;
     this.textArea = document.querySelector(this.textAreaClass);
-    console.log(this.textArea);
   }
   _createClass(EditorFuncs, [{
+    key: "p",
+    value: function p() {
+      this.tagSelected("p");
+    }
+  }, {
     key: "h1",
     value: function h1() {
-      var start = this.textArea.selectionStart;
-      console.log(start);
-      var finish = this.textArea.selectionEnd;
-      console.log(finish);
-      var allText = this.textArea.value;
-      var sel = allText.substring(start, finish);
-      console.log(sel);
-      var newText = allText.substring(0, start) + "<center>" + sel + "</center>" + allText.substring(finish, allText.length);
-      console.log(newText);
-      this.textArea.value = newText;
+      this.tagSelected("h1");
     }
   }, {
     key: "h2",
-    value: function h2() {}
+    value: function h2() {
+      this.tagSelected("h2");
+    }
   }, {
     key: "h3",
-    value: function h3() {}
+    value: function h3() {
+      this.tagSelected("h3");
+    }
+  }, {
+    key: "h4",
+    value: function h4() {
+      this.tagSelected("h4");
+    }
   }, {
     key: "strong",
-    value: function strong() {}
+    value: function strong() {
+      this.tagSelected("strong");
+    }
   }, {
     key: "strike",
-    value: function strike() {}
+    value: function strike() {
+      this.tagSelected("s");
+    }
   }, {
     key: "link",
     value: function link() {}
@@ -51,6 +59,31 @@ var EditorFuncs = /*#__PURE__*/function () {
   }, {
     key: "image",
     value: function image() {}
+  }, {
+    key: "tagSelected",
+    value: function tagSelected(tag) {
+      var start = this.textArea.selectionStart;
+      var finish = this.textArea.selectionEnd;
+      var allText = this.textArea.value;
+      var sel = allText.substring(start, finish);
+      var startTag = "<" + tag + ">";
+      var startTagLen = startTag.length;
+      var endTag = "</" + tag + ">";
+      var endTagLen = endTag.length;
+      if (allText.indexOf("<" + tag + ">" + sel + "</" + tag + ">") !== -1) {
+        var startWithTag = start - startTagLen;
+        var endWithTag = finish + endTagLen;
+        var newSel = allText.substring(startWithTag, endWithTag);
+        newSel = newSel.replace(/<\/?[^>]+(>|$)/g, "");
+        this.textArea.value = allText.substring(0, startWithTag) + newSel + allText.substring(endWithTag, allText.length);
+        this.textArea.selectionStart = startWithTag;
+        this.textArea.selectionEnd = endWithTag - startTagLen - endTagLen;
+      } else {
+        this.textArea.value = allText.substring(0, start) + "<" + tag + ">" + sel + "</" + tag + ">" + allText.substring(finish, allText.length);
+        this.textArea.selectionStart = start + startTagLen;
+        this.textArea.selectionEnd = finish + startTagLen;
+      }
+    }
   }]);
   return EditorFuncs;
 }();
