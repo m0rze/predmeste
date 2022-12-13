@@ -12,13 +12,21 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 var EditorFuncs = /*#__PURE__*/function () {
   function EditorFuncs(textAreaClass) {
     _classCallCheck(this, EditorFuncs);
+    this.startPositionInTextArea = null;
     this.textAreaClass = textAreaClass;
     this.textArea = document.querySelector(this.textAreaClass);
+    this.editorModal = document.querySelector(".editor-modal");
+    this.addEvents();
   }
   _createClass(EditorFuncs, [{
     key: "p",
     value: function p() {
       this.tagSelected("p");
+    }
+  }, {
+    key: "center",
+    value: function center() {
+      this.tagSelected("div class='text-center'");
     }
   }, {
     key: "h1",
@@ -52,7 +60,11 @@ var EditorFuncs = /*#__PURE__*/function () {
     }
   }, {
     key: "link",
-    value: function link() {}
+    value: function link() {
+      this.startPositionInTextArea = this.textArea.selectionStart;
+      document.querySelector(".editor-modal").classList.toggle("deactivated");
+      document.querySelector(".make-link").classList.toggle("deactivated");
+    }
   }, {
     key: "file",
     value: function file() {}
@@ -60,26 +72,45 @@ var EditorFuncs = /*#__PURE__*/function () {
     key: "image",
     value: function image() {}
   }, {
+    key: "addEvents",
+    value: function addEvents() {
+      var _this = this;
+      document.querySelector(".add-link").addEventListener("click", function () {
+        var url = document.querySelector(".link-url").value;
+        var anchor = document.querySelector(".link-anchor").value;
+        if (url && anchor) {
+          var allText = _this.textArea.value;
+          var link = "<a href=\"".concat(url, "\">").concat(anchor, "</a>");
+          _this.textArea.value = "".concat(allText.substring(0, _this.startPositionInTextArea)).concat(link).concat(allText.substring(_this.startPositionInTextArea, allText.length));
+          document.querySelector(".make-link").classList.toggle("deactivated");
+          document.querySelector(".editor-modal").classList.toggle("deactivated");
+          document.querySelector(".link-url").value = "";
+          document.querySelector(".link-anchor").value = "";
+        }
+      });
+    }
+  }, {
     key: "tagSelected",
     value: function tagSelected(tag) {
       var start = this.textArea.selectionStart;
       var finish = this.textArea.selectionEnd;
       var allText = this.textArea.value;
       var sel = allText.substring(start, finish);
-      var startTag = "<" + tag + ">";
+      var startTag = "<".concat(tag, ">");
       var startTagLen = startTag.length;
-      var endTag = "</" + tag + ">";
+      var endTag = "</".concat(tag, ">");
       var endTagLen = endTag.length;
-      if (allText.indexOf("<" + tag + ">" + sel + "</" + tag + ">") !== -1) {
+      if (allText.indexOf("<".concat(tag, ">").concat(sel, "</").concat(tag, ">")) !== -1) {
         var startWithTag = start - startTagLen;
         var endWithTag = finish + endTagLen;
         var newSel = allText.substring(startWithTag, endWithTag);
-        newSel = newSel.replace(/<\/?[^>]+(>|$)/g, "");
-        this.textArea.value = allText.substring(0, startWithTag) + newSel + allText.substring(endWithTag, allText.length);
+        var regex = new RegExp("</?".concat(tag, "(>|$)"), "g");
+        newSel = newSel.replace(regex, "");
+        this.textArea.value = "".concat(allText.substring(0, startWithTag)).concat(newSel).concat(allText.substring(endWithTag, allText.length));
         this.textArea.selectionStart = startWithTag;
         this.textArea.selectionEnd = endWithTag - startTagLen - endTagLen;
       } else {
-        this.textArea.value = allText.substring(0, start) + "<" + tag + ">" + sel + "</" + tag + ">" + allText.substring(finish, allText.length);
+        this.textArea.value = "".concat(allText.substring(0, start), "<").concat(tag, ">").concat(sel, "</").concat(tag, ">").concat(allText.substring(finish, allText.length));
         this.textArea.selectionStart = start + startTagLen;
         this.textArea.selectionEnd = finish + startTagLen;
       }
@@ -92,17 +123,28 @@ var Editor = /*#__PURE__*/function () {
     _classCallCheck(this, Editor);
     this.textAreaClass = textAreaClass;
     this.editor = document.querySelector(".editor-buttons");
+    this.closeModalButton = document.querySelector(".close-modal");
     this.addEvents();
     this.editorFuncs = new EditorFuncs(this.textAreaClass);
   }
   _createClass(Editor, [{
     key: "addEvents",
     value: function addEvents() {
-      var _this = this;
+      var _this2 = this;
       this.editor.addEventListener("click", function (event) {
         if (event.target.tagName === "BUTTON") {
-          _this.executeEvent(event.target);
+          _this2.executeEvent(event.target);
         }
+      });
+      this.closeModalButton.addEventListener("click", function () {
+        // document.querySelector(".cat_id").value = "";
+        // document.querySelector(".cat_name").value = "";
+        document.querySelector(".editor-modal").classList.toggle("deactivated");
+        document.querySelector(".make-link").classList.toggle("deactivated");
+        document.querySelector(".link-url").value = "";
+        document.querySelector(".link-anchor").value = "";
+
+        // document.querySelector("#wrapper").classList.toggle("low-opacity");
       });
     }
   }, {

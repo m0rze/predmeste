@@ -10861,6 +10861,27 @@ textarea.form-control-lg {
   margin-right: 15px;
 }
 
+.editor-modal {
+  display: flex;
+  background-color: #eeeeee;
+  position: fixed;
+  width: 70%;
+  left: 15%;
+  top: 100px;
+  border: 1px solid #d0cece;
+  border-radius: 15px;
+}
+.editor-modal .row {
+  width: 100%;
+}
+.editor-modal .make-elements {
+  padding: 2%;
+}
+
+.deactivated {
+  display: none;
+}
+
 :root {
   --blue: #4e73df;
   --indigo: #6610f2;
