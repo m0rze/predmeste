@@ -8,7 +8,8 @@
             @if(empty($pages) || count($pages) === 0)
                 <h6 class="m-0 font-weight-bold text-primary">Страницы отсутствуют</h6>
             @endif
-            <a href="{{ route("admin.pages.create") }}" class="btn btn-success btn-rnd @if(empty($pages) || count($pages) === 0) mt-3 @endif">
+            <a href="{{ route("admin.pages.create") }}"
+               class="btn btn-success btn-rnd @if(empty($pages) || count($pages) === 0) mt-3 @endif">
                 Создать новую
             </a>
         </div>
@@ -20,7 +21,7 @@
                         <tr>
                             <th>Заголовок</th>
                             <th>Slug</th>
-                            <th>Количество страниц</th>
+                            <th>Категория</th>
                             <th>Дата</th>
                             <th>Действие</th>
                         </tr>
@@ -29,7 +30,7 @@
                         <tr>
                             <th>Заголовок</th>
                             <th>Slug</th>
-                            <th>Количество страниц</th>
+                            <th>Категория</th>
                             <th>Дата</th>
                             <th>Действие</th>
                         </tr>
@@ -37,11 +38,15 @@
                         <tbody>
                         @foreach($pages as $page)
                             <tr class="table-item">
-                                <td data-id="{{ $page->id }}" class="td-title">{{ $page->title }}</td>
+                                <td data-id="{{ $page->id }}" class="td-title"><a
+                                        href="{{ route("admin.pages.edit", $page->id) }}">{{ $page->title }}</a></td>
                                 <td>{{ $page->slug }}</td>
-                                <td>{{ $page->pages_count }}</td>
+                                <td>{{ $page->category->title }}</td>
                                 <td>{{ $page->created_at }}</td>
-                                <td class="delete-icon" data-id="{{ $page->id }}"><button type="button" class="delete-item btn btn-rnd btn-outline-danger"><i class="fa fa-solid fa-circle-xmark"></i></button></td>
+                                <td class="delete-icon" data-id="{{ $page->id }}">
+                                    <button type="button" class="delete-item btn btn-rnd btn-outline-danger"><i
+                                            class="fa fa-solid fa-circle-xmark"></i></button>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

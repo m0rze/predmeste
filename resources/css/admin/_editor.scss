@@ -18,6 +18,12 @@
     border: 1px solid #d0cece;
     border-radius: 15px;
 
+    .errors {
+        width: 100%;
+        text-align: center;
+        color: red;
+    }
+
     .row {
         width: 100%;
     }

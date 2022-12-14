@@ -10871,6 +10871,11 @@ textarea.form-control-lg {
   border: 1px solid #d0cece;
   border-radius: 15px;
 }
+.editor-modal .errors {
+  width: 100%;
+  text-align: center;
+  color: red;
+}
 .editor-modal .row {
   width: 100%;
 }

@@ -1,9 +1,14 @@
 class EditorFuncs {
     constructor(textAreaClass) {
+        this.axios = window.axios;
+        this.token = document.querySelector(".token").value;
+        this.API = "/api/admin/pages";
+
         this.startPositionInTextArea = null;
         this.textAreaClass = textAreaClass;
         this.textArea = document.querySelector(this.textAreaClass);
         this.editorModal = document.querySelector(".editor-modal");
+        this.uploadFileForm = document.querySelector(".upload-file-form");
         this.addEvents();
     }
 
@@ -49,29 +54,79 @@ class EditorFuncs {
     }
 
     file() {
-
+        this.startPositionInTextArea = this.textArea.selectionStart;
+        document.querySelector(".editor-modal").classList.toggle("deactivated");
+        document.querySelector(".upload-file").classList.toggle("deactivated");
+        document.querySelector(".file-label").innerHTML = "Файл (.doc(x), .pdf, .xls(x), .txt)";
+        document.querySelector(".file-type").value = "doc";
     }
 
     image() {
+        this.startPositionInTextArea = this.textArea.selectionStart;
+        document.querySelector(".editor-modal").classList.toggle("deactivated");
+        document.querySelector(".upload-file").classList.toggle("deactivated");
+        document.querySelector(".file-label").innerHTML = "Файл (.png, .jpeg, .jpg)";
+        document.querySelector(".file-type").value = "img";
+    }
 
+    async uploadFile(formData) {
+        return await this.axios.post(this.API + "/upload-file", formData, {
+                headers: {
+                    token: this.token,
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        );
     }
 
     addEvents() {
+        this.uploadFileForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const formData = new FormData(this.uploadFileForm);
+            this.uploadFile(formData).then(response => {
+                if(response.data.result === 1)
+                {
+                    if(!response.data.filename)
+                    {
+                        document.querySelector(".errors").innerHTML = "Ошибка сохранения";
+                    } else {
+                        const allText = this.textArea.value;
+                        const type = document.querySelector(".file-type").value;
+                        let fileTag = "";
+                        if(type === "doc")
+                        {
+                            fileTag = `[DOCFILE:${response.data.filename}]`;
+                        } else if(type === "img")
+                        {
+                            fileTag = `[IMAGE:${response.data.filename}]`;
+                        }
+
+                        this.textArea.value = `${allText.substring(0, this.startPositionInTextArea)}${fileTag}${allText.substring(this.startPositionInTextArea, allText.length)}`;
+                        document.querySelector(".close-modal").click();
+                    }
+                }
+                if(response.data.errors)
+                {
+                    document.querySelector(".errors").innerHTML = response.data.errors;
+                }
+            });
+        });
 
         document.querySelector(".add-link").addEventListener("click", () => {
             const url = document.querySelector(".link-url").value;
             const anchor = document.querySelector(".link-anchor").value;
-            if(url && anchor)
-            {
+            if (url && anchor) {
                 const allText = this.textArea.value;
                 const link = `<a href="${url}">${anchor}</a>`;
                 this.textArea.value = `${allText.substring(0, this.startPositionInTextArea)}${link}${allText.substring(this.startPositionInTextArea, allText.length)}`;
-                document.querySelector(".make-link").classList.toggle("deactivated");
-                document.querySelector(".editor-modal").classList.toggle("deactivated");
-                document.querySelector(".link-url").value = "";
-                document.querySelector(".link-anchor").value = "";
+                // document.querySelector(".make-link").classList.toggle("deactivated");
+                // document.querySelector(".editor-modal").classList.toggle("deactivated");
+                // document.querySelector(".link-url").value = "";
+                // document.querySelector(".link-anchor").value = "";
+                document.querySelector(".close-modal").click();
             }
         });
+
     }
 
     tagSelected(tag) {
@@ -84,8 +139,7 @@ class EditorFuncs {
         const startTagLen = startTag.length;
         const endTag = `</${tag}>`;
         const endTagLen = endTag.length;
-        if(allText.indexOf(`<${tag}>${sel}</${tag}>`) !== -1)
-        {
+        if (allText.indexOf(`<${tag}>${sel}</${tag}>`) !== -1) {
             const startWithTag = start - startTagLen;
             const endWithTag = finish + endTagLen;
             let newSel = allText.substring(startWithTag, endWithTag);
@@ -122,14 +176,19 @@ class Editor {
         });
 
         this.closeModalButton.addEventListener("click", () => {
-            // document.querySelector(".cat_id").value = "";
-            // document.querySelector(".cat_name").value = "";
             document.querySelector(".editor-modal").classList.toggle("deactivated");
-            document.querySelector(".make-link").classList.toggle("deactivated");
+
+            if(!document.querySelector(".make-link").classList.contains("deactivated")){
+                document.querySelector(".make-link").classList.toggle("deactivated");
+            }
+            if(!document.querySelector(".upload-file").classList.contains("deactivated")){
+                document.querySelector(".upload-file").classList.toggle("deactivated");
+            }
             document.querySelector(".link-url").value = "";
             document.querySelector(".link-anchor").value = "";
+            document.querySelector(".selected-file").value = "";
+            document.querySelector(".errors").innerHTML = "";
 
-            // document.querySelector("#wrapper").classList.toggle("low-opacity");
         });
     }
 

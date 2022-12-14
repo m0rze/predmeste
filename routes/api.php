@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\ApiCategoryController;
+use App\Http\Controllers\Api\Admin\ApiPagesController;
 use App\Http\Middleware\ApiVerifyCustom;
 
 /*
@@ -26,5 +27,9 @@ Route::middleware([ApiVerifyCustom::class])->group(function () {
     Route::group(["prefix" => "admin", "as" => "admin."], function () {
         Route::post("/category/add", [ApiCategoryController::class, "addNew"]);
         Route::delete("/category/delete/{id}", [ApiCategoryController::class, "delete"]);
+
+        Route::post("/pages/upload-file", [ApiPagesController::class, "uploadFile"]);
+        Route::delete("/pages/delete/{id}", [ApiPagesController::class, "delete"]);
+
     });
 });
