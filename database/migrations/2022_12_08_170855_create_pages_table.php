@@ -15,8 +15,12 @@ return new class extends Migration {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
 //            $table->unsignedBigInteger("category_id");
-            $table->foreignId("category_id")
+            $table->foreignId("category_id")->nullable()
                 ->constrained("categories")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId("static_place_id")->nullable()
+                ->constrained("static_places")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string("title", 255);

@@ -19,6 +19,10 @@ class Page extends Model
     {
         return $this->belongsTo(Category::class, "category_id", "id");
     }
+    public function staticPlace(): BelongsTo
+    {
+        return $this->belongsTo(StaticPlace::class, "static_place_id", "id");
+    }
 
     public function getSlugOptions(): SlugOptions
     {

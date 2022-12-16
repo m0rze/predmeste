@@ -31,15 +31,32 @@ class PagesQB
 
     public function getPageById($id)
     {
-        return Page::find($id);
+        return Page::with("category")->with("staticPlace")->find($id);
     }
 
-    public function getPagesForTable()
+    public function getCategorizedPagesForTable()
     {
 
         return Page::with("category")
+            ->whereNotNull("category_id")
+            ->whereNull("static_place_id")
             ->orderBy("created_at", "DESC")
             ->paginate(20);
+    }
+    public function getStaticPagesForTable()
+    {
+        return Page::whereNull("category_id")
+            ->whereNotNull("static_place_id")
+            ->orderBy("created_at", "DESC")
+            ->paginate(20);
+    }
+    public function getStaticPages()
+    {
+        return Page::whereNull("category_id")
+            ->with("staticPlace")
+            ->whereNotNull("static_place_id")
+            ->orderBy("created_at", "DESC")
+            ->get();
     }
 
     public function saveNew($data)

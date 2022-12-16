@@ -14,9 +14,10 @@ if [ $1 ]; then
     docker exec -w /var/www/html app composer install
     docker exec -w /var/www/html app npm install
     docker exec app chmod -R 0777 /var/www/html/storage/
-    docker exec app chmod -R 0777 /var/www/html/public/
+    docker exec app chmod -R 0777 /var/www/html/public/uploads
     docker exec -w /var/www/html app php artisan key:generate
     docker exec -w /var/www/html app php artisan migrate
+    docker exec -w /var/www/html app php artisan db:seed
     sed -i "s/APP_ENV=local/APP_ENV=production/I" .env
     sed -i "s/APP_DEBUG=true/APP_DEBUG=false/I" .env
 fi

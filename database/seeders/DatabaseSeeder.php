@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\StaticPlace;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $staticPlaces = [
+            "Хэдер",
+            "Сайтбар",
+            "Футер"
+        ];
+
+        foreach ($staticPlaces as $place)
+        {
+            StaticPlace::create(["title" => $place]);
+        }
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('static_pages', function (Blueprint $table) {
+        Schema::create('static_places', function (Blueprint $table) {
             $table->id();
-            $table->string("title", 255);
-            $table->string("slug", 255);
-            $table->longText("body");
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
-            $table->index("slug");
+            $table->string("title", 20);
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('static_pages');
+        Schema::dropIfExists('static_places');
     }
 };

@@ -2,13 +2,13 @@
 @section('title', 'Список страниц')
 @section("content")
 
-    <h1 class="h3 mb-2 text-gray-800 mt-4">Список Страниц</h1>
+    <h1 class="h3 mb-2 text-gray-800 mt-4">Список страниц</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             @if(empty($pages) || count($pages) === 0)
                 <h6 class="m-0 font-weight-bold text-primary">Страницы отсутствуют</h6>
             @endif
-            <a href="{{ route("admin.pages.create") }}"
+            <a href="{{ route("admin.pages.create", $type) }}"
                class="btn btn-success btn-rnd @if(empty($pages) || count($pages) === 0) mt-3 @endif">
                 Создать новую
             </a>
@@ -21,7 +21,11 @@
                         <tr>
                             <th>Заголовок</th>
                             <th>Slug</th>
-                            <th>Категория</th>
+                            @if($type === "categorized")
+                                <th>Категория</th>
+                            @else
+                                <th>Место расположения</th>
+                            @endif
                             <th>Дата</th>
                             <th>Действие</th>
                         </tr>
@@ -30,7 +34,11 @@
                         <tr>
                             <th>Заголовок</th>
                             <th>Slug</th>
-                            <th>Категория</th>
+                            @if($type === "categorized")
+                                <th>Категория</th>
+                            @else
+                                <th>Место расположения</th>
+                            @endif
                             <th>Дата</th>
                             <th>Действие</th>
                         </tr>
@@ -41,7 +49,12 @@
                                 <td data-id="{{ $page->id }}" class="td-title"><a
                                         href="{{ route("admin.pages.edit", $page->id) }}">{{ $page->title }}</a></td>
                                 <td>{{ $page->slug }}</td>
-                                <td>{{ $page->category->title }}</td>
+                                @if($type === "categorized")
+                                    <td>{{ $page->category->title }}</td>
+                                @else
+                                    <td>{{ $page->staticPlace->title }}</td>
+                                @endif
+
                                 <td>{{ $page->created_at }}</td>
                                 <td class="delete-icon" data-id="{{ $page->id }}">
                                     <button type="button" class="delete-item btn btn-rnd btn-outline-danger"><i

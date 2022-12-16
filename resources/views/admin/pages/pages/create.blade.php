@@ -12,11 +12,16 @@
                     <input required type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
                 </div>
                 <div class="row mt-3">
-                    <label for="category_id"><h4 class="text-primary">Категория</h4></label>
-                    <select required class="form-control" name="category_id" id="category_id">
+                    @if($type === "categorized")
+                        <label for="category_id"><h4 class="text-primary">Категория</h4></label>
+                        <select required class="form-control" name="category_id" id="category_id">
+                    @else
+                        <label for="static_place_id"><h4 class="text-primary">Место расположения на странице</h4></label>
+                        <select required class="form-control" name="static_place_id" id="static_place_id">
+                    @endif
                         <option value=""></option>
-                        @foreach($categories as $oneCategory)
-                            <option value="{{ $oneCategory->id }}">{{ $oneCategory->title }}</option>
+                        @foreach($selectData as $oneData)
+                            <option value="{{ $oneData->id }}">{{ $oneData->title }}</option>
                         @endforeach
                     </select>
                 </div>

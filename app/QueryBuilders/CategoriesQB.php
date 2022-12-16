@@ -7,6 +7,12 @@ use App\Models\Category;
 class CategoriesQB
 {
 
+
+    public function getCategories()
+    {
+        return Category::all();
+    }
+
     public function getCategoriesForNewPage()
     {
         return Category::select("id", "title")->get();

@@ -13,13 +13,18 @@
                     <input required type="text" class="form-control" name="title" id="title" value="{{ $page->title }}">
                 </div>
                 <div class="row mt-3">
-                    <label for="category_id"><h4 class="text-primary">Категория</h4></label>
-                    <select required class="form-control" name="category_id" id="category_id">
-                        <option value=""></option>
-                        @foreach($categories as $oneCategory)
-                            <option @if($page->category_id === $oneCategory->id) selected @endif value="{{ $oneCategory->id }}">{{ $oneCategory->title }}</option>
-                        @endforeach
-                    </select>
+                    @if(!empty($page->category_id))
+                        <label for="category_id"><h4 class="text-primary">Категория</h4></label>
+                        <select required class="form-control" name="category_id" id="category_id"
+                    @else
+                             <label for="static_place_id"><h4 class="text-primary">Место расположения на странице</h4></label>
+                                <select required class="form-control" name="static_place_id" id="static_place_id">
+                    @endif
+                         <option value=""></option>
+                         @foreach($selectData as $oneData)
+                              <option @if($oneData->id === $page->category_id || $oneData->id === $page->static_place_id) selected @endif value="{{ $oneData->id }}">{{ $oneData->title }}</option>
+                         @endforeach
+                         </select>
                 </div>
                 <div class="row mt-3">
                     <label for="body"><h4 class="text-primary">Текст</h4></label>
