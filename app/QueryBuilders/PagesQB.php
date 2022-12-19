@@ -7,6 +7,16 @@ use App\Models\Page;
 class PagesQB
 {
 
+    public function getFeaturedPagesForTable()
+    {
+        return Page::with("category")
+            ->whereNotNull("category_id")
+            ->whereNull("static_place_id")
+            ->orderBy("created_at", "DESC")
+            ->limit(9)
+            ->get();
+    }
+
     public function deleteById($id)
     {
         $page = Page::find($id);

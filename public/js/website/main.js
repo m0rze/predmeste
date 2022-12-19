@@ -1,6 +1,6 @@
 /* =================================
 ------------------------------------
-	Template Name: Industry.INC 
+	Template Name: Industry.INC
 	Description: Industry.INC HTML Template
 	Author: colorlib
 	Author URI: https://www.colorlib.com/
@@ -32,7 +32,7 @@ $(window).on('load', function() {
 		allowParentLinks: true
 	});
 
-	$('.slicknav_nav').append('<li class="search-switch-warp"><button class="search-switch"><i class="fa fa-search"></i></button></li>');
+	// $('.slicknav_nav').append('<li class="search-switch-warp"><button class="search-switch"><i class="fa fa-search"></i></button></li>');
 
 
 	/*------------------
@@ -117,7 +117,7 @@ $(window).on('load', function() {
 	$('.video-popup').magnificPopup({
 		type: 'iframe'
 	});
-	
+
 	/*------------------
 		Accordions
 	--------------------*/

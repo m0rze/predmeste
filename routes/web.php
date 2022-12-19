@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\ValidateAuth;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\CategoriesController as AdminCategoriesController;
 use App\Http\Controllers\Admin\PagesController as AdminPagesController;
 
@@ -19,13 +21,18 @@ use App\Http\Controllers\Website\CategoriesController as WebsiteCategoriesContro
 |
 */
 
-Route::group(["prefix" => "admin", "as" => "admin."], function () {
-    Route::get("/", [AdminCategoriesController::class, "index"]);
-    Route::resource("categories", AdminCategoriesController::class);
-    Route::get('pages/create/{type}', [AdminPagesController::class, "create"])->name("pages.create");
-    Route::get('pages/static-pages/', [AdminPagesController::class, "staticIndex"])->name("static-pages.index");
-    Route::get('pages/pages/', [AdminPagesController::class, "index"])->name("pages.index");
-    Route::resource("pages", AdminPagesController::class, ['except' => ['create', 'index']]);
+Route::get("/admin/login", [LoginController::class, "show"])->name("login");
+Route::post("/admin/login", [LoginController::class, "login"])->name("gologin");
+
+Route::middleware([ValidateAuth::class])->group(function () {
+    Route::group(["prefix" => "admin", "as" => "admin."], function () {
+        Route::get("/", [AdminCategoriesController::class, "index"]);
+        Route::resource("categories", AdminCategoriesController::class);
+        Route::get('pages/create/{type}', [AdminPagesController::class, "create"])->name("pages.create");
+        Route::get('pages/static-pages/', [AdminPagesController::class, "staticIndex"])->name("static-pages.index");
+        Route::get('pages/pages/', [AdminPagesController::class, "index"])->name("pages.index");
+        Route::resource("pages", AdminPagesController::class, ['except' => ['create', 'index']]);
+    });
 });
 
 Route::get("/", [WebsiteIndexController::class, "index"])->name("index");

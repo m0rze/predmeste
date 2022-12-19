@@ -1,0 +1,13 @@
+.features {
+    padding: 3%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .feature {
+        width: 100%;
+        text-align: center;
+    }
+}
