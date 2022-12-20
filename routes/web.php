@@ -36,5 +36,7 @@ Route::middleware([ValidateAuth::class])->group(function () {
 });
 
 Route::get("/", [WebsiteIndexController::class, "index"])->name("index");
-Route::get("/{page}", [WebsitePageController::class, "showStatic"])->name("page.show.static");
+Route::get("/static/{page}", [WebsitePageController::class, "showStatic"])->name("page.show.static");
+Route::get("/widgets", [WebsitePageController::class, "showWidgets"])->name("page.show.widgets");
+Route::get("/{cat}/{page}", [WebsitePageController::class, "showCategorized"])->name("page.show.categorized");
 Route::get("/{slug}", [WebsiteCategoriesController::class, "show"])->name("category.show");

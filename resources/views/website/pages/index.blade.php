@@ -1,6 +1,7 @@
 @extends("website.layouts.main")
 @section('title', 'Управляющая компания "Предместье"')
 @section("content")
+
     <section class="features-section spad">
         <div class="container">
             <div class="last-text">
@@ -13,4 +14,7 @@
             </div>
         </div>
     </section>
+@endsection
+@section("scripts")
+    <script src="{{ asset("js/website/index.js") }}"></script>
 @endsection

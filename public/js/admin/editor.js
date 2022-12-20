@@ -78,7 +78,8 @@ var EditorFuncs = /*#__PURE__*/function () {
       this.startPositionInTextArea = this.textArea.selectionStart;
       document.querySelector(".editor-modal").classList.toggle("deactivated");
       document.querySelector(".upload-file").classList.toggle("deactivated");
-      document.querySelector(".file-label").innerHTML = "Файл (.doc(x), .pdf, .xls(x), .txt)";
+      document.querySelector(".file-label").innerHTML = "Файл (.doc(x), .pdf, .xls(x), .txt), макс. размер 10Мб";
+      document.querySelector(".file-title").style.display = "block";
       document.querySelector(".file-type").value = "doc";
     }
   }, {
@@ -87,7 +88,8 @@ var EditorFuncs = /*#__PURE__*/function () {
       this.startPositionInTextArea = this.textArea.selectionStart;
       document.querySelector(".editor-modal").classList.toggle("deactivated");
       document.querySelector(".upload-file").classList.toggle("deactivated");
-      document.querySelector(".file-label").innerHTML = "Файл (.png, .jpeg, .jpg)";
+      document.querySelector(".file-label").innerHTML = "Файл (.png, .jpeg, .jpg), макс. размер 10Мб";
+      document.querySelector(".file-title").style.display = "none";
       document.querySelector(".file-type").value = "img";
     }
   }, {
@@ -135,7 +137,7 @@ var EditorFuncs = /*#__PURE__*/function () {
               var type = document.querySelector(".file-type").value;
               var fileTag = "";
               if (type === "doc") {
-                fileTag = "[DOCFILE:".concat(response.data.filename, "]");
+                fileTag = "[DOCFILE:".concat(response.data.filename, ":").concat(response.data.filetitle, "]");
               } else if (type === "img") {
                 fileTag = "[IMAGE:".concat(response.data.filename, "]");
               }
@@ -222,6 +224,7 @@ var Editor = /*#__PURE__*/function () {
         document.querySelector(".link-anchor").value = "";
         document.querySelector(".selected-file").value = "";
         document.querySelector(".errors").innerHTML = "";
+        document.querySelector(".file-title").value = "";
       });
     }
   }, {

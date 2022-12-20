@@ -5,17 +5,7 @@
         <a href="{{ route("index") }}" class="site-logo">
             <img src="{{ asset("img/logo.png") }}" alt="УК Предместье">
         </a>
-        <div class="header-right">
-            <div class="header-info-box">
-                <div class="hib-icon">
-                    <img src="img/icons/phone.png" alt="" class="">
-                </div>
-                <div class="hib-text">
-                    <h6>+546 990221 123</h6>
-                    <p>contact@industryalinc.com</p>
-                </div>
-            </div>
-        </div>
+
         <!-- Menu -->
         <nav class="site-nav-menu">
             <ul>

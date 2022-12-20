@@ -52,13 +52,13 @@
 <!-- Footer section end -->
 
 <!--====== Javascripts & Jquery ======-->
-<script src="js/website/jquery-3.2.1.min.js"></script>
-<script src="js/website/bootstrap.min.js"></script>
-<script src="js/website/jquery.slicknav.min.js"></script>
-<script src="js/website/owl.carousel.min.js"></script>
-<script src="js/website/circle-progress.min.js"></script>
-<script src="js/website/jquery.magnific-popup.min.js"></script>
-<script src="js/website/main.js"></script>
-
+<script src="{{ asset("js/website/jquery-3.2.1.min.js") }}"></script>
+<script src="{{ asset("js/website/bootstrap.min.js") }}"></script>
+<script src="{{ asset("js/website/jquery.slicknav.min.js") }}"></script>
+<script src="{{ asset("js/website/owl.carousel.min.js") }}"></script>
+<script src="{{ asset("js/website/circle-progress.min.js") }}"></script>
+<script src="{{ asset("js/website/jquery.magnific-popup.min.js") }}"></script>
+<script src="{{ asset("js/website/main.js") }}"></script>
+@yield("scripts")
 </body>
 </html>

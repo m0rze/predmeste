@@ -57,7 +57,8 @@ class EditorFuncs {
         this.startPositionInTextArea = this.textArea.selectionStart;
         document.querySelector(".editor-modal").classList.toggle("deactivated");
         document.querySelector(".upload-file").classList.toggle("deactivated");
-        document.querySelector(".file-label").innerHTML = "Файл (.doc(x), .pdf, .xls(x), .txt)";
+        document.querySelector(".file-label").innerHTML = "Файл (.doc(x), .pdf, .xls(x), .txt), макс. размер 10Мб";
+        document.querySelector(".file-title").style.display = "block";
         document.querySelector(".file-type").value = "doc";
     }
 
@@ -65,7 +66,8 @@ class EditorFuncs {
         this.startPositionInTextArea = this.textArea.selectionStart;
         document.querySelector(".editor-modal").classList.toggle("deactivated");
         document.querySelector(".upload-file").classList.toggle("deactivated");
-        document.querySelector(".file-label").innerHTML = "Файл (.png, .jpeg, .jpg)";
+        document.querySelector(".file-label").innerHTML = "Файл (.png, .jpeg, .jpg), макс. размер 10Мб";
+        document.querySelector(".file-title").style.display = "none";
         document.querySelector(".file-type").value = "img";
     }
 
@@ -95,7 +97,7 @@ class EditorFuncs {
                         let fileTag = "";
                         if(type === "doc")
                         {
-                            fileTag = `[DOCFILE:${response.data.filename}]`;
+                            fileTag = `[DOCFILE:${response.data.filename}:${response.data.filetitle}]`;
                         } else if(type === "img")
                         {
                             fileTag = `[IMAGE:${response.data.filename}]`;
@@ -188,6 +190,7 @@ class Editor {
             document.querySelector(".link-anchor").value = "";
             document.querySelector(".selected-file").value = "";
             document.querySelector(".errors").innerHTML = "";
+            document.querySelector(".file-title").value = "";
 
         });
     }

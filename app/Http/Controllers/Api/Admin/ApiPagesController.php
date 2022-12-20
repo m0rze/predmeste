@@ -22,6 +22,7 @@ class ApiPagesController extends Controller
         $result = [
             "result" => 0,
             "filename" => "",
+            "filetitle" => "",
             "errors" => ""
         ];
         $type = $request->input("type");
@@ -44,7 +45,7 @@ class ApiPagesController extends Controller
         }
         try {
             $this->validate($request, [
-                'file' => ['required', 'mimes:'.$mimes, 'max:10000']
+                'file' => ['required', 'mimes:'.$mimes]
             ]);
         } catch (\Exception $e)
         {
@@ -56,6 +57,16 @@ class ApiPagesController extends Controller
         {
             $result["errors"] = "Отсутствует файл";
             return json_encode($result);
+        }
+        if($type === "doc")
+        {
+            if(!empty($request->input("file_title")))
+            {
+                $result["filetitle"] = $request->input("file_title");
+            } else {
+                $result["filetitle"] = $file->getClientOriginalName();
+            }
+
         }
         $fileName = time()."_".$file->getClientOriginalName();
         if($file->storeAs($type, $fileName, "uploads"))

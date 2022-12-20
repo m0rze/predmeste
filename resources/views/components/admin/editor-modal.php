@@ -25,6 +25,10 @@
                         <label class="file-label" for="file"></label>
                         <input required id="file" class="selected-file form-control" name="file" type="file">
                     </div>
+                    <div class="row mt-2 file-title">
+                        <label class="file-label" for="file_title">Заголовок файла (пустое, если по имени)</label>
+                        <input id="file_title" class="selected-file form-control" name="file_title" type="text">
+                    </div>
                     <div class="row mt-4">
                         <button type="submit" class="add-file btn btn-rnd btn-success">Добавить</button>
                     </div>

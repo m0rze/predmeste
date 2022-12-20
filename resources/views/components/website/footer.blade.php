@@ -3,7 +3,11 @@
         <div class="row">
             <div class="footer-widget">
                 <h2 class="fw-title">Полезные ссылки</h2>
+
             <ul>
+                <li class="col-lg-3 col-md-6 col-sm-6">
+                    <a href="{{ route("page.show.widgets") }}">Обращения</a>
+                </li>
                 @if(!empty($mainData->staticPages))
                     @foreach($mainData->staticPages as $oneStaticPage)
                         @if($oneStaticPage->staticPlace->id === 3)

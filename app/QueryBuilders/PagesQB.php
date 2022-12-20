@@ -43,6 +43,15 @@ class PagesQB
     {
         return Page::with("category")->with("staticPlace")->find($id);
     }
+    public function getPageBySlug($slug)
+    {
+        $page =  Page::with("category")->where("slug", "=", $slug)->get();
+        if(empty($page->first()))
+        {
+            return false;
+        }
+        return $page->first();
+    }
 
     public function getCategorizedPagesForTable()
     {

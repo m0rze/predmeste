@@ -3,6 +3,7 @@
     "/js/admin/categories.js": "/js/admin/categories.js",
     "/js/admin/pages.js": "/js/admin/pages.js",
     "/js/admin/editor.js": "/js/admin/editor.js",
+    "/js/website/index.js": "/js/website/index.js",
     "/css/admin/app.css": "/css/admin/app.css",
     "/img/about.jpg": "/img/about.jpg",
     "/img/blog/1.jpg": "/img/blog/1.jpg",
@@ -23,6 +24,7 @@
     "/img/features/3.jpg": "/img/features/3.jpg",
     "/img/features-bg.jpg": "/img/features-bg.jpg",
     "/img/hero-slider/1.jpg": "/img/hero-slider/1.jpg",
+    "/img/hero-slider/1_old.jpg": "/img/hero-slider/1_old.jpg",
     "/img/hero-slider/2.jpg": "/img/hero-slider/2.jpg",
     "/img/icons/cogwheel.png": "/img/icons/cogwheel.png",
     "/img/icons/helmet.png": "/img/icons/helmet.png",
@@ -39,6 +41,7 @@
     "/img/logo-contact.png": "/img/logo-contact.png",
     "/img/logo-light.png": "/img/logo-light.png",
     "/img/logo.png": "/img/logo.png",
+    "/img/logo_old.png": "/img/logo_old.png",
     "/img/milestones-bg.jpg": "/img/milestones-bg.jpg",
     "/img/page-top-bg/1.jpg": "/img/page-top-bg/1.jpg",
     "/img/page-top-bg/2.jpg": "/img/page-top-bg/2.jpg",
@@ -50,5 +53,6 @@
     "/img/team/3.jpg": "/img/team/3.jpg",
     "/img/testimonial-bg.jpg": "/img/testimonial-bg.jpg",
     "/img/testimonial-thumb.jpg": "/img/testimonial-thumb.jpg",
+    "/img/top-logo.jpg": "/img/top-logo.jpg",
     "/img/video-box.jpg": "/img/video-box.jpg"
 }
