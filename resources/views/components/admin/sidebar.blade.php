@@ -23,6 +23,10 @@
         <a class="nav-link" href="{{ route("admin.static-pages.index") }}">
             <span>Статичные страницы</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route("admin.widgets.index") }}">
+            <span>Виджеты</span></a>
+    </li>
     <hr class="sidebar-divider my-0">
     <div class="text-center d-none d-md-inline mt-3">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

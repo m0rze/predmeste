@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\ApiCategoryController;
 use App\Http\Controllers\Api\Admin\ApiPagesController;
+use App\Http\Controllers\Api\Admin\ApiWidgetsController;
 use App\Http\Middleware\ApiVerifyCustom;
 
 /*
@@ -30,6 +31,8 @@ Route::middleware([ApiVerifyCustom::class])->group(function () {
 
         Route::post("/pages/upload-file", [ApiPagesController::class, "uploadFile"]);
         Route::delete("/pages/delete/{id}", [ApiPagesController::class, "delete"]);
+
+        Route::delete("/widgets/delete/{id}", [ApiWidgetsController::class, "delete"]);
 
     });
 });

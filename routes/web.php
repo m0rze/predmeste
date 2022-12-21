@@ -5,10 +5,12 @@ use App\Http\Middleware\ValidateAuth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\CategoriesController as AdminCategoriesController;
 use App\Http\Controllers\Admin\PagesController as AdminPagesController;
+use App\Http\Controllers\Admin\WidgetsController as AdminWidgetsController;
 
 use App\Http\Controllers\Website\IndexController as WebsiteIndexController;
 use App\Http\Controllers\Website\PageController as WebsitePageController;
 use App\Http\Controllers\Website\CategoriesController as WebsiteCategoriesController;
+use App\Http\Controllers\Website\WidgetsController as WebsiteWidgetsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,11 +34,12 @@ Route::middleware([ValidateAuth::class])->group(function () {
         Route::get('pages/static-pages/', [AdminPagesController::class, "staticIndex"])->name("static-pages.index");
         Route::get('pages/pages/', [AdminPagesController::class, "index"])->name("pages.index");
         Route::resource("pages", AdminPagesController::class, ['except' => ['create', 'index']]);
+        Route::resource("widgets", AdminWidgetsController::class);
     });
 });
 
 Route::get("/", [WebsiteIndexController::class, "index"])->name("index");
 Route::get("/static/{page}", [WebsitePageController::class, "showStatic"])->name("page.show.static");
-Route::get("/widgets", [WebsitePageController::class, "showWidgets"])->name("page.show.widgets");
+Route::get("/widgets", [WebsiteWidgetsController::class, "show"])->name("page.show.widgets");
 Route::get("/{cat}/{page}", [WebsitePageController::class, "showCategorized"])->name("page.show.categorized");
 Route::get("/{slug}", [WebsiteCategoriesController::class, "show"])->name("category.show");

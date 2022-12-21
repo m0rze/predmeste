@@ -1,8 +1,8 @@
 @extends("admin.layouts.main")
-@section('title', 'Новая страница')
+@section('title', 'Редактировать страницу '.$page->title)
 @section("content")
 
-    <h1 class="h3 mb-2 text-gray-800 mt-4">Новая страница</h1>
+    <h1 class="h3 mb-2 text-gray-800 mt-4">Редактировать страницу {{ $page->title }}</h1>
     <div class="row mt-2">
         <div class="col-10">
             <form class="shadow page-form" action="{{ route("admin.pages.update", $page->id) }}" method="post">

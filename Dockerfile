@@ -19,7 +19,10 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libssh2-1-dev \
     libssh2-1 \
-    mc
+    mc \
+    python3 \
+    python3-venv \
+    libaugeas0
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -31,6 +34,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash
 RUN apt-get update && apt install nodejs
+
+RUN python3 -m venv /opt/certbot/
+RUN /opt/certbot/bin/pip install --upgrade pip
+RUN /opt/certbot/bin/pip install certbot certbot-apache
+RUN ln -s /opt/certbot/bin/certbot /usr/bin/certbot
 
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www

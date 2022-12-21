@@ -7,6 +7,10 @@ use App\Models\Category;
 class CategoriesQB
 {
 
+    public function getCatBySlug($slug)
+    {
+        return Category::where("slug", "=", $slug)->get()->first();
+    }
 
     public function getCategories()
     {

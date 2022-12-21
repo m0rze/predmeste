@@ -13,7 +13,7 @@ class PagesQB
             ->whereNotNull("category_id")
             ->whereNull("static_place_id")
             ->orderBy("created_at", "DESC")
-            ->limit(9)
+            ->limit(10)
             ->get();
     }
 
@@ -81,5 +81,14 @@ class PagesQB
     public function saveNew($data)
     {
         return Page::create($data);
+    }
+
+
+    public function getPagesFromCat($catId)
+    {
+        return Page::with("category")
+            ->where("category_id", "=", $catId)
+            ->orderBy("created_at", "DESC")
+            ->paginate(20);
     }
 }

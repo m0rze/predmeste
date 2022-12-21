@@ -2288,3 +2288,10 @@ Responsive
     display: block;
     font-weight: bolder;
 }
+
+.widgets {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
