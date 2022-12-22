@@ -17,8 +17,10 @@ services:
     working_dir: /var/www/html
     expose:
       - 80
+      - 443
     ports:
       - "80:80"
+      - "443:443"
     links:
       - mysql
     depends_on:

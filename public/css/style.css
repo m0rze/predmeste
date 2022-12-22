@@ -2172,6 +2172,10 @@ Responsive
     }
 }
 
+.logo-img {
+    width: 30%;
+}
+
 .top-section {
     width: 100%;
 }

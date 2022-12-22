@@ -3,7 +3,7 @@
     <div class="site-navbar">
         <!-- Logo -->
         <a href="{{ route("index") }}" class="site-logo">
-            <img src="{{ asset("img/logo.png") }}" alt="УК Предместье">
+            <img src="{{ asset("img/logo.png") }}" alt="УК Предместье" class="logo-img">
         </a>
 
         <!-- Menu -->

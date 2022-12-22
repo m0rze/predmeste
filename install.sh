@@ -20,7 +20,7 @@ if [ $1 ]; then
     docker exec -w /var/www/html app php artisan db:seed
     sed -i "s/APP_ENV=local/APP_ENV=production/I" .env
     sed -i "s/APP_DEBUG=true/APP_DEBUG=false/I" .env
-    docker exec app certbot --apache -n --agree-tos --email admin@$1 -d $1
-    docker exec app certbot --apache -n --agree-tos --email admin@$1 --expand -d $1 -d www.$1
-    crontab -l | { cat; echo '31 11 * */2 * docker exec app certbot renew --post-hook "service apache2 reload"'; } | crontab -
+#    docker exec app certbot --apache -n --agree-tos --email admin@$1 -d $1
+#    docker exec app certbot --apache -n --agree-tos --email admin@$1 --expand -d $1 -d www.$1
+#    crontab -l | { cat; echo '31 11 * */2 * docker exec app certbot renew --post-hook "service apache2 reload"'; } | crontab -
 fi

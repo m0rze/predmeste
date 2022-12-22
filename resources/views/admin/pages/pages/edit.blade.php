@@ -8,11 +8,11 @@
             <form class="shadow page-form" action="{{ route("admin.pages.update", $page->id) }}" method="post">
                 @csrf
                 @method("PUT")
-                <div class="row">
+                <div class="row" style="padding: 3%">
                     <label class="" for="title"><h4 class="text-primary">Заголовок</h4></label>
                     <input required type="text" class="form-control" name="title" id="title" value="{{ $page->title }}">
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3" style="padding: 3%">
                     @if(!empty($page->category_id))
                         <label for="category_id"><h4 class="text-primary">Категория</h4></label>
                         <select required class="form-control" name="category_id" id="category_id"
@@ -26,12 +26,12 @@
                          @endforeach
                          </select>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3" style="padding: 3%">
                     <label for="body"><h4 class="text-primary">Текст</h4></label>
                     <x-admin.editor-buttons></x-admin.editor-buttons>
                     <textarea required name="body" id="body" rows="20" class="body form-control">{{ $page->body }}</textarea>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3" style="padding: 3%">
                     <button type="submit" class="btn btn-rnd btn-success">Применить</button>
                 </div>
             </form>

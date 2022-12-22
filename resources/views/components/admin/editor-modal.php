@@ -1,7 +1,10 @@
 <div class="editor-modal deactivated">
-    <div class="row">
-        <div class="col-10"></div>
-        <div class="col-2"><button class="close-modal btn btn-primary float-right mt-2 mr-2" type="button"><i class="fa fa-solid fa-circle-xmark"></i></button></div>
+    <div class="" style="width: 100%;padding: 2%">
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-2"><button class="close-modal btn btn-primary float-right mt-2 mr-2" type="button"><i class="fa fa-solid fa-circle-xmark"></i></button></div>
+        </div>
+
         <div class="make-elements">
             <div class="mt-2 errors">
 
